@@ -87,13 +87,11 @@ class FunctionComponent(ResilientComponent):
             try:
               yield StatusMessage("Attempting to change password")
               if helper.LDAP_IS_ACTIVE_DIRECTORY:
-                # Prod: res = c.extend.microsoft.modify_password(str(ldap_md_dn), ldap_md_new_password)
-                # Test:
-                res = 'c.extend.microsoft.modify_password(' + str(ldap_md_dn) + ', ' + str(ldap_md_new_password) + ')'
+                res = c.extend.microsoft.modify_password(str(ldap_md_dn), ldap_md_new_password)
+                # Test: res = 'c.extend.microsoft.modify_password(' + str(ldap_md_dn) + ', ' + str(ldap_md_new_password) + ')'
               else:
-                # Prod: res = c.modify(ldap_md_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_md_new_password])]})
-                # Test:
-                res = 'c.modify(' + str(ldap_md_dn) + ', {userPassword: [(MODIFY_REPLACE, [' + str(ldap_md_new_password) + '])]})'
+                res = c.modify(ldap_md_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_md_new_password])]})
+                # Test: res = 'c.modify(' + str(ldap_md_dn) + ', {userPassword: [(MODIFY_REPLACE, [' + str(ldap_md_new_password) + '])]})'
 
             except Exception:
               raise ValueError("Could not change password. Check ldap_md_dn and ldap_md_new_password are valid")
