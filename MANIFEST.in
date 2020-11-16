@@ -1,0 +1,9 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+include fn_ldap_multidomain_utilities/util/*
+include fn_ldap_multidomain_utilities/LICENSE
+include doc/*.md
+include doc/screenshots/*
+
+exclude *.bak
