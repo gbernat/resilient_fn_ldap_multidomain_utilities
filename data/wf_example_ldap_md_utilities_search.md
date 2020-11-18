@@ -19,38 +19,29 @@
 ### Pre-Processing Script
 ```python
 ##  LDAP Utilities: Search - pre-processing script ##
-inputs.ldap_search_base = "dc=example,dc=com"
-inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
-inputs.ldap_search_attributes = "uid,cn,sn,mail,telephoneNumber"
-inputs.ldap_search_param = artifact.value
+inputs.ldap_md_domain_name = 'domain1'
+inputs.ldap_md_search_base = "dc=example,dc=com"
+inputs.ldap_md_search_filter = "(&(objectClass=person)(|(cn=%ldap_param%)(mail=%ldap_param%)))"
+inputs.ldap_md_search_attributes = "cn,displayName,mail,pwdLastSet,whenCreated,title,department,userAccountControl,manager,distinguishedName"
+inputs.ldap_md_search_param = artifact.value
 ```
 
 ### Post-Processing Script
 ```python
 ##  LDAP Utilities: Search - post-processing script ##
-# Example of expected results - OpenLdap
-"""
-'entries': [{"dn": "uid=newton,dc=example,dc=com", "telephoneNumber": [], "uid": ["newton"],
-    "mail": ["newton@ldap.forumsys.com"], "sn": ["Newton"], "cn": ["Isaac Newton"]},
-    {"dn": "uid=einstein,dc=example,dc=com", "telephoneNumber": ["314-159-2653"], "uid": ["einstein"],
-    "mail": ["einstein@ldap.forumsys.com"], "sn": ["Einstein"], "cn": ["Albert Einstein"]}]
-"""
-
-# Example of expected results - ActiveDirectory
-"""
-'entries': [{u'dn': u'CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com', 
-              u'telephoneNumber': u'314-159-2653', u'cn': u'Isaac Newton', 
-              u'mail': u'einstein@resilient.ibm.com', u'sn': u'Newton'}]
-"""
 
 #  Globals
 ENTRY_TO_DATATABLE_MAP = {
-   "uid": "uid",
-   "cn": "fullname",
-   "sn": "surname",
-   "mail": "email_address",
-   "telephoneNumber": "telephone_number"
+    "cn": "cn",
+    "displayName": "displayName",
+    "mail": "email_address",
+    "pwdLastSet": "password_last_set",
+    "whenCreated": "when_created",
+    "title": "title",
+    "department": "department",
+    "manager": "manager"
 }
+
 
 # Processing if the function is a success
 if(results.success):
@@ -61,7 +52,7 @@ if(results.success):
     
     else:
       # Add Row
-      row = incident.addRow("ldap_query_results")
+      row = incident.addRow("ldap_users_query_results")
       
       for k in ENTRY_TO_DATATABLE_MAP:
 

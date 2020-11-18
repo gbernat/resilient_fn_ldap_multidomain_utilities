@@ -18,13 +18,14 @@
 
 ### Pre-Processing Script
 ```python
-# Set the ldap_search_base and ldap_search_filter
+# Set the ldap_md_search_base and ldap_md_search_filter
 # using the ldap_param wildcard then get the email
 # address the user you want to toggle access for from the artifact's value
 
-inputs.ldap_search_base = "dc=example,dc=com"
-inputs.ldap_search_filter = "(&(mail=%ldap_param%))"
-inputs.ldap_search_param =  artifact.value
+inputs.ldap_md_domain_name = 'domain1'
+inputs.ldap_md_search_base = "dc=example,dc=com"
+inputs.ldap_md_search_filter = "(&(objectClass=person)(mail=%ldap_param%))"
+inputs.ldap_md_search_param = artifact.value
 ```
 
 ### Post-Processing Script
@@ -40,17 +41,18 @@ None
 `ldap_md_utilities_toggle_access`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_ldap_md_utilities`
 
 ### Pre-Processing Script
 ```python
-# Once the LDAP Utilities: Search completes, get the DN of the first entry
+# Once the LDAP MultiDomain Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Toggle Access for
 
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
+inputs.ldap_md_domain_name = 'domain1'
+inputs.ldap_md_dn = workflow.properties.search_output["entries"][0]["dn"]
 ```
 
 ### Post-Processing Script
@@ -65,7 +67,7 @@ if (results.success):
   if (results.user_status == "Disabled"):
     color = "#ff402b" #red
   
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3">LDAP MultiDomain Utilities: Toggle Access workflow <u>complete</u>:</i>
                     <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
                     <b>Status:</b> <b style="color: {1}">{2}</b>
                     <b>DN:</b> '{3}'""".format(artifact.value, color, results.user_status, results.user_dn)

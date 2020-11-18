@@ -18,13 +18,14 @@
 
 ### Pre-Processing Script
 ```python
-# Set the ldap_search_base and ldap_search_filter
+# Set the ldap_md_search_base and ldap_md_search_filter
 # using the ldap_param wildcard then get the email
 # address the user you want to update from the artifact's value
 
-inputs.ldap_search_base = "dc=example,dc=com"
-inputs.ldap_search_filter = "(&(mail=%ldap_param%))"
-inputs.ldap_search_param =  artifact.value
+inputs.ldap_md_domain_name = 'domain1'
+inputs.ldap_md_search_base = "dc=example,dc=com"
+inputs.ldap_md_search_filter = "(&(mail=%ldap_param%))"
+inputs.ldap_md_search_param = artifact.value
 ```
 
 ### Post-Processing Script
@@ -47,14 +48,15 @@ None
 
 ### Pre-Processing Script
 ```python
-# Once the LDAP Utilities: Search completes, get the DN of the first entry
+# Once the LDAP MultiDomain Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to update. Then set
 # the name of the attribute to update and list the values
 
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
-inputs.ldap_attribute_name = "homePhone"
-inputs.ldap_attribute_values = "['081111111']"
-# inputs.ldap_attribute_values = "['081111111', '082222222']"
+inputs.ldap_md_domain_name = 'domain1'
+inputs.ldap_md_dn = workflow.properties.search_output["entries"][0]["dn"]
+inputs.ldap_md_attribute_name = "homePhone"
+inputs.ldap_md_attribute_values = "['081111111']"
+# inputs.ldap_md_attribute_values = "['081111111', '082222222']"
 ```
 
 ### Post-Processing Script
@@ -63,7 +65,7 @@ inputs.ldap_attribute_values = "['081111111']"
 # a note is added to the incident
 
 if (results.success):
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Update workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3">LDAP MultiDomain Utilities: Update workflow <u>complete</u>:</i>
                     An LDAP Attribute has been updated
                     <b>Attribute:</b> {0}
                     <b>New Value(s):</b> {1}
