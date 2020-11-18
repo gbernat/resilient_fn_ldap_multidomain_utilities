@@ -92,9 +92,8 @@ class FunctionComponent(ResilientComponent):
             try:
               yield StatusMessage("Attempting to {0} {1}".format(ldap_md_toggle_access, ldap_md_dn))
               # perform the Modify operation
-              # Prod: res = c.modify(ldap_md_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
-              # Test:
-              res = 'c.modify(' + str(ldap_md_dn) + ' , {' + str(ldap_user_account_control_attribute) + ': [(MODIFY_REPLACE, [' + str(ldap_user_accout_control_value) + '])]})'
+              res = c.modify(ldap_md_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
+              # Test: res = 'c.modify(' + str(ldap_md_dn) + ' , {' + str(ldap_user_account_control_attribute) + ': [(MODIFY_REPLACE, [' + str(ldap_user_accout_control_value) + '])]})'
 
             except Exception:
               raise ValueError("Could not toggle access for this user. Ensue ldap_md_dn is valid")

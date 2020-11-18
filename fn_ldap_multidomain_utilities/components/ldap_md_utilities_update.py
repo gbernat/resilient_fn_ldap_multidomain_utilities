@@ -84,9 +84,8 @@ class FunctionComponent(ResilientComponent):
             try:
               yield StatusMessage("Attempting to update {0}".format(ldap_md_attribute_name))
               # perform the Modify operation
-              # Prod: res = c.modify(ldap_md_dn, {ldap_md_attribute_name: [(MODIFY_REPLACE, ldap_md_attribute_values)]})
-              # Test:
-              res = 'c.modify(' + str(ldap_md_dn) + ', {' + str(ldap_md_attribute_name) + ': [(MODIFY_REPLACE, ' + str(ldap_md_attribute_values) + ')]})'
+              res = c.modify(ldap_md_dn, {ldap_md_attribute_name: [(MODIFY_REPLACE, ldap_md_attribute_values)]})
+              # Test: res = 'c.modify(' + str(ldap_md_dn) + ', {' + str(ldap_md_attribute_name) + ': [(MODIFY_REPLACE, ' + str(ldap_md_attribute_values) + ')]})'
 
             except Exception:
               raise ValueError("Failed to update. Ensure 'ldap_md_dn' is valid and the update meets your LDAP CONSTRAINTS")

@@ -85,9 +85,8 @@ class FunctionComponent(ResilientComponent):
             try:
               yield StatusMessage("Attempting to remove user(s) from group(s)")
               # perform the removeMermbersFromGroups operation
-              # Prod: res = ad_remove_members_from_groups(c, ldap_md_multiple_user_dn, ldap_md_multiple_group_dn, True)
-              # Test:
-              res = 'ad_remove_members_from_groups(c, ' + str(ldap_md_multiple_user_dn) + ', ' + str(ldap_md_multiple_group_dn) + ', True)'
+              res = ad_remove_members_from_groups(c, ldap_md_multiple_user_dn, ldap_md_multiple_group_dn, True)
+              # Test: res = 'ad_remove_members_from_groups(c, ' + str(ldap_md_multiple_user_dn) + ', ' + str(ldap_md_multiple_group_dn) + ', True)'
               
               # Return list of users that were removed, and ignore users that do not exist, not valid, or not member of group
               if res and "changes" in c.request:

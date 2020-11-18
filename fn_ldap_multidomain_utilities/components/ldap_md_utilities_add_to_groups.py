@@ -85,9 +85,8 @@ class FunctionComponent(ResilientComponent):
             try:
               yield StatusMessage("Attempting to add user(s) to group(s)")
               # perform the removeMermbersFromGroups operation
-              # Prod: res = ad_add_members_to_groups(c, ldap_md_multiple_user_dn, ldap_md_multiple_group_dn, True)
-              # Test:
-              res = 'ad_add_members_to_groups(c, ' + str(ldap_md_multiple_user_dn) + ', ' + str(ldap_md_multiple_group_dn) + ', True)'
+              res = ad_add_members_to_groups(c, ldap_md_multiple_user_dn, ldap_md_multiple_group_dn, True)
+              # Test: res = 'ad_add_members_to_groups(c, ' + str(ldap_md_multiple_user_dn) + ', ' + str(ldap_md_multiple_group_dn) + ', True)'
 
             except Exception:
               raise ValueError("Ensure all user and group DNs exist")
