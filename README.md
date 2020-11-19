@@ -43,7 +43,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-These Functions are strongly based on IBM's [fn_ldap_utilities](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_ldap_utilities)
+These functions are strongly based on IBM's [fn_ldap_utilities](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_ldap_utilities).
 Capability to interact with any number of domains is provided through app.config settings.
 In addition, set_password is improved with an option to auto generate passwords instead of
 manually input.

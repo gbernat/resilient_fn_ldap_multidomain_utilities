@@ -35,14 +35,13 @@
 * Mainly based on IBM's [fn_ldap_utilities](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_ldap_utilities).
 * Improved to interact with any number of ldap/AD domains.
 * Added an input field in each function to set a destination domain.
-* New feature in set password, allowing auto generated password, and lenght setting. In addition, for security reason it is possible to not return the password.
+* New feature in ldap_md_set_password, allowing auto generated password, and lenght setting. In addition, for security reason it is possible to not return the password.
 
 ---
 
 ## Function - LDAP MultiDomain Utilities: Update
 A function that updates the attribute of a DN with a new value
-
- ![screenshot: fn-ldap-multidomain-utilities-update ](./screenshots/fn-ldap-multidomain-utilities-update.png)
+Supports: Active Directory and OpenLDAP
 
 <details><summary>Inputs:</summary>
 <p>
@@ -62,9 +61,11 @@ A function that updates the attribute of a DN with a new value
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "success": True/False,
+    "domain_name": ldap_md_domain_name,
+    "attribute_name": ldap_md_attribute_name,
+    "attribute_values": ldap_md_attribute_values,
+    "user_dn": ldap_md_dn                
 }
 ```
 
@@ -116,8 +117,7 @@ if (results.success):
 ---
 ## Function - LDAP MultiDomain Utilities: Add to Group(s)
 A function that allows adding multiple users to multiple groups
-
- ![screenshot: fn-ldap-multidomain-utilities-add-to-groups ](./screenshots/fn-ldap-multidomain-utilities-add-to-groups.png)
+Supports: Active Directory only
 
 <details><summary>Inputs:</summary>
 <p>
@@ -136,9 +136,10 @@ A function that allows adding multiple users to multiple groups
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "success": True/False,
+    "domain_name": ldap_md_domain_name,
+    "users_dn": ldap_md_multiple_user_dn,
+    "groups_dn": ldap_md_multiple_group_dn
 }
 ```
 
@@ -207,8 +208,7 @@ if (results.success):
 ---
 ## Function - LDAP MultiDomain Utilities: Search
 Resilient Function to do a search or query against an LDAP server.
-
- ![screenshot: fn-ldap-multidomain-utilities-search ](./screenshots/fn-ldap-multidomain-utilities-search.png)
+Supports: Active Directory and OpenLDAP
 
 <details><summary>Inputs:</summary>
 <p>
@@ -229,9 +229,9 @@ Resilient Function to do a search or query against an LDAP server.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+                "success": True/False,
+                "domain_name": ldap_md_domain_name,
+                "entries": List of entries returned from LDAP. Each entry will always contain the DN Attribute. Each entry is a Dictionary with the Key being the Attribute and the Value being the Attributes Value. Note: Some Attribute Values can be a List. 
 }
 ```
 
@@ -239,6 +239,10 @@ results = {
 </details>
 
 <details><summary>Workflows</summary>
+
+  Additional Configuration:
+  For Workflow "Example: LDAP Utilities: Search" to display query results, users need to manually add the “LDAP Users Query results” data table to the Artifacts tab.
+  For Workflow "Example: LDAP Utilities: Search Computer" to display query results, users need to manually add the “LDAP Computers Query results” data table to the Artifacts tab.
 
   <details><summary>Example Pre-Process Script:</summary>
   <p>
@@ -316,8 +320,7 @@ if(results.success):
 ---
 ## Function - LDAP MultiDomain Utilities: Set Password
 A function that allows you to set a new password for an LDAP entry given the entry's DN
-
- ![screenshot: fn-ldap-multidomain-utilities-set-password ](./screenshots/fn-ldap-multidomain-utilities-set-password.png)
+Supports: Active Directory and OpenLDAP
 
 <details><summary>Inputs:</summary>
 <p>
@@ -338,9 +341,10 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "success": True/False,
+    "domain_name": ldap_md_domain_name,
+    "user_dn": ldap_md_dn,
+    "new_password": If ldap_md_return_new_password was setted True, shows the password in clear text, otherwise, shows '********'
 }
 ```
 
@@ -390,8 +394,7 @@ if (results.success):
 ---
 ## Function - LDAP MultiDomain Utilities: Toggle Access
 A function that allows an LDAP user, with the correct privileges to enable or disable another account given their DN
-
- ![screenshot: fn-ldap-multidomain-utilities-toggle-access ](./screenshots/fn-ldap-multidomain-utilities-toggle-access.png)
+Supports: Active Directory only
 
 <details><summary>Inputs:</summary>
 <p>
@@ -410,9 +413,10 @@ A function that allows an LDAP user, with the correct privileges to enable or di
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "success": True/False,
+    "domain_name": ldap_md_domain_name,
+    "user_dn": ldap_md_dn,
+    "user_status": Enabled/Disabled
 }
 ```
 
@@ -465,8 +469,7 @@ if (results.success):
 ---
 ## Function - LDAP MultiDomain Utilities: Remove from Group(s)
 A function that allows you to remove multiple from multiple groups
-
- ![screenshot: fn-ldap-multidomain-utilities-remove-from-groups ](./screenshots/fn-ldap-multidomain-utilities-remove-from-groups.png)
+Supports: Active Directory only
 
 <details><summary>Inputs:</summary>
 <p>
@@ -485,9 +488,10 @@ A function that allows you to remove multiple from multiple groups
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "success": True/False,
+    "domain_name": ldap_md_domain_name,
+    "users_dn": users_dn if user was removed, otherwise None,
+    "groups_dn": ldap_md_multiple_group_dn
 }
 ```
 
@@ -563,8 +567,6 @@ if (results.success):
 
 ## Data Table - LDAP Computers query results
 
- ![screenshot: dt-ldap-computers-query-results](./screenshots/dt-ldap-computers-query-results.png)
-
 #### API Name:
 ldap_computers_query_results
 
@@ -579,8 +581,6 @@ ldap_computers_query_results
 
 ---
 ## Data Table - LDAP Users query results
-
- ![screenshot: dt-ldap-users-query-results](./screenshots/dt-ldap-users-query-results.png)
 
 #### API Name:
 ldap_users_query_results
