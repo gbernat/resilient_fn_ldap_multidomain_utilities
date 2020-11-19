@@ -40,8 +40,10 @@
 ---
 
 ## Function - LDAP MultiDomain Utilities: Update
+<p>
 A function that updates the attribute of a DN with a new value
 Supports: Active Directory and OpenLDAP
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
@@ -116,8 +118,10 @@ if (results.success):
 
 ---
 ## Function - LDAP MultiDomain Utilities: Add to Group(s)
+<p>
 A function that allows adding multiple users to multiple groups
 Supports: Active Directory only
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
@@ -207,8 +211,10 @@ if (results.success):
 
 ---
 ## Function - LDAP MultiDomain Utilities: Search
+<p>
 Resilient Function to do a search or query against an LDAP server.
 Supports: Active Directory and OpenLDAP
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
@@ -239,11 +245,11 @@ results = {
 </details>
 
 <details><summary>Workflows</summary>
-
+  <p>
   Additional Configuration:
   For Workflow "Example: LDAP Utilities: Search" to display query results, users need to manually add the “LDAP Users Query results” data table to the Artifacts tab.
   For Workflow "Example: LDAP Utilities: Search Computer" to display query results, users need to manually add the “LDAP Computers Query results” data table to the Artifacts tab.
-
+  </p>
   <details><summary>Example Pre-Process Script:</summary>
   <p>
 
@@ -319,8 +325,10 @@ if(results.success):
 
 ---
 ## Function - LDAP MultiDomain Utilities: Set Password
+<p>
 A function that allows you to set a new password for an LDAP entry given the entry's DN
 Supports: Active Directory and OpenLDAP
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
@@ -393,8 +401,10 @@ if (results.success):
 
 ---
 ## Function - LDAP MultiDomain Utilities: Toggle Access
+<p>
 A function that allows an LDAP user, with the correct privileges to enable or disable another account given their DN
 Supports: Active Directory only
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
@@ -468,8 +478,10 @@ if (results.success):
 
 ---
 ## Function - LDAP MultiDomain Utilities: Remove from Group(s)
+<p>
 A function that allows you to remove multiple from multiple groups
 Supports: Active Directory only
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
