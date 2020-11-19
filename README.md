@@ -29,7 +29,7 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.0
+### v1.1.1
 * Initial Release
 
 ---
@@ -43,7 +43,10 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_ldap_multidomain_utilities'
+These Functions are strongly based on IBM's [fn_ldap_utilities](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_ldap_utilities)
+Capability to interact with any number of domains is provided through app.config settings.
+In addition, set_password is improved with an option to auto generate passwords instead of
+manually input.
 
 ---
 
@@ -83,29 +86,35 @@ Resilient Circuits Components for 'fn_ldap_multidomain_utilities'
   $ resilient-circuits customize -y -l fn-ldap-multidomain-utilities
   ```
 * Open the config file, scroll to the bottom and edit your fn_ldap_multidomain_utilities configurations:
+
+  Do as follow in order to assign a domain name for a set of configuration settings: <domainName>-<config attribute>.
+  e.g. myFirstDomain-ldap_server = 10.10.10.10
+
+  Later, "domainName" must be used in ldap_md_domain_name input fields on each function.
+
   ```
   $ nano ~/.resilient/app.config
   ```
-  | Config | Required | Example | Description |
-  | ------ | :------: | ------- | ----------- |
-  | **domain1-ldap_server** | Yes | `xxx.xxx.xxx.xxx` | *Enter a description of the config here* |
-  | **domain1-ldap_port** | Yes | `389` | *Enter a description of the config here* |
-  | **domain1-ldap_use_ssl** | Yes | `false` | *Enter a description of the config here* |
-  | **domain1-ldap_auth** | Yes | `simple` | *Enter a description of the config here* |
-  | **domain1-ldap_user_dn** | Yes | `cn=Username1,cn=Users,dc=example,dc=com,dc=ar` | *Enter a description of the config here* |
-  | **domain1-ldap_user_ntlm** | Yes | `domain\user` | *Enter a description of the config here* |
-  | **domain1-ldap_password** | Yes | `password` | *Enter a description of the config here* |
-  | **domain1-ldap_is_active_directory** | Yes | `false` | *Enter a description of the config here* |
-  | **domain1-ldap_connect_timeout** | Yes | `10` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_server** | Yes | `xxx.xxx.xxx.xxx` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_port** | Yes | `389` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_use_ssl** | Yes | `false` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_auth** | Yes | `simple` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_user_dn** | Yes | `cn=Username,cn=Users,dc=example,dc=com,dc=ar` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_user_ntlm** | Yes | `domain\user` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_password** | Yes | `password` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_is_active_directory** | Yes | `false` | *Enter a description of the config here* |
-  | **anotherdomain-ldap_connect_timeout** | Yes | `10` | *Enter a description of the config here* |
+  | Config | Required | Example |
+  | ------ | :------: | ------- |
+  | **domain1-ldap_server** | Yes | `xxx.xxx.xxx.xxx` |
+  | **domain1-ldap_port** | Yes | `389` |
+  | **domain1-ldap_use_ssl** | Yes | `false` |
+  | **domain1-ldap_auth** | Yes | `simple` |
+  | **domain1-ldap_user_dn** | Yes | `cn=Username1,cn=Users,dc=example,dc=com,dc=ar` |
+  | **domain1-ldap_user_ntlm** | Yes | `domain\user` |
+  | **domain1-ldap_password** | Yes | `password` |
+  | **domain1-ldap_is_active_directory** | Yes | `false` |
+  | **domain1-ldap_connect_timeout** | Yes | `10` |
+  | **anotherdomain-ldap_server** | Yes | `xxx.xxx.xxx.xxx` |
+  | **anotherdomain-ldap_port** | Yes | `389` |
+  | **anotherdomain-ldap_use_ssl** | Yes | `false` |
+  | **anotherdomain-ldap_auth** | Yes | `simple` |
+  | **anotherdomain-ldap_user_dn** | Yes | `cn=Username,cn=Users,dc=example,dc=com,dc=ar` |
+  | **anotherdomain-ldap_user_ntlm** | Yes | `domain\user` |
+  | **anotherdomain-ldap_password** | Yes | `password` |
+  | **anotherdomain-ldap_is_active_directory** | Yes | `false` |
+  | **anotherdomain-ldap_connect_timeout** | Yes | `10` |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -116,17 +125,6 @@ Resilient Circuits Components for 'fn_ldap_multidomain_utilities'
   ```
   $ resilient-circuits run
   ```
-
-### Custom Layouts
-<!--
-  Use this section to provide guidance on where the user should add any custom fields and data tables.
-  You may wish to recommend a new incident tab.
-  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
--->
-* Import the Data Tables and Custom Fields like the screenshot below:
-
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
 ---
 
 ## Uninstall

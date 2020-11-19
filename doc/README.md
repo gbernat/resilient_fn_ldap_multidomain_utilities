@@ -32,9 +32,10 @@
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+* Mainly based on IBM's [fn_ldap_utilities](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_ldap_utilities).
+* Improved to interact with any number of ldap/AD domains.
+* Added an input field in each function to set a destination domain.
+* New feature in set password, allowing auto generated password, and lenght setting. In addition, for security reason it is possible to not return the password.
 
 ---
 
