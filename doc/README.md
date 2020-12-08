@@ -35,7 +35,7 @@
 * Mainly based on IBM's [fn_ldap_utilities](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_ldap_utilities).
 * Improved to interact with any number of ldap/AD domains.
 * Added an input field in each function to set a destination domain.
-* New feature in ldap_md_set_password, allowing auto generated password, and lenght setting. In addition, for security reason it is possible to not return the password.
+* New feature in ldap_md_set_password, allowing auto generated password, and length setting. In addition, for security reason it is possible to not return the password.
 
 ---
 
